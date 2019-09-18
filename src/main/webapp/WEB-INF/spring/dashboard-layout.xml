@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!-- 기본 레이아웃 -->
+    <definition name="dashboard-layouts-tiles" template="/WEB-INF/tiles/dashboard-layouts.jsp">
+        <put-attribute name="dashboard-header" value="/WEB-INF/tiles/dashboard-header.jsp" />
+        <put-attribute name="sidebar" value="/WEB-INF/tiles/default-sidebar.jsp" />
+        <put-attribute name="content" value="" />
+    </definition>
+
+    <!-- 테스트 레이아웃 -->
+    <definition name="*.page" extends="dashboard-layouts-tiles">
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,102 @@
+{
+  "items":[{
+    "serviceId":4,
+    "memberId":"quotia72",
+    "serviceTitle":"123421",
+    "accountBank":"우리 은행",
+    "accountNumber":"123412121212",
+    "serviceIsDelete":false,
+    "hashTag":null,
+    "serviceModifiedDate":"2019-08-30T18:44:58.000+0000",
+    "serviceImgUri":null,
+    "serviceDescription":"12341232\n123\n12\n1212342",
+    "serviceRegisterDate":"2019-08-30T18:44:58.000+0000",
+    "serviceRegisterIsActive":true,
+    "servicePrice":"500,000원",
+    "serviceDateDescription":"주 1회 총 3회",
+    "serviceStartDate":"2019-08-30T18:00:00.000+0000",
+    "serviceEndDate":"2019-09-01T02:00:00.000+0000",
+    "serviceCategory":{
+      "categoryId":1,
+      "categorySubject":"요리",
+      "categoryType":"체험",
+      "categoryPeriod":"개인",
+      "categoryScale":"정기",
+      "categoryPlace":"실외"
+    },
+    "serviceAddress":{
+      "addressId":4,
+      "addressState":"서울특별시",
+      "addressCity":"마포구",
+      "addressDong":"신공덕동",
+      "addressDetail":"170 123-12"
+    }
+  },
+  {
+    "serviceId":5,
+    "memberId":"quotia72",
+    "serviceTitle":"123421",
+    "accountBank":"우리 은행",
+    "accountNumber":"123412121212",
+    "serviceIsDelete":false,
+    "hashTag":null,
+    "serviceModifiedDate":"2019-08-30T18:45:55.000+0000",
+    "serviceImgUri":null,
+    "serviceDescription":"12341232\n123\n12\n1212342",
+    "serviceRegisterDate":"2019-08-30T18:45:55.000+0000",
+    "serviceRegisterIsActive":true,
+    "servicePrice":"400,000원",
+    "serviceDateDescription":"주 3회 총 10회",
+    "serviceStartDate":"2019-08-30T18:00:00.000+0000",
+    "serviceEndDate":"2019-09-01T02:00:00.000+0000",
+    "serviceCategory":{
+      "categoryId":1,
+      "categorySubject":"요리",
+      "categoryType":"체험",
+      "categoryPeriod":"개인",
+      "categoryScale":"정기",
+      "categoryPlace":"실외"
+    },
+    "serviceAddress":{
+      "addressId":5,
+      "addressState":"서울특별시",
+      "addressCity":"마포구",
+      "addressDong":"신공덕동",
+      "addressDetail":"170 123-123"}
+  },
+  {
+    "serviceId":3,
+    "memberId":"quotia72",
+    "serviceTitle":"123421",
+    "accountBank":"우리 은행",
+    "accountNumber":"123412121212",
+    "serviceIsDelete":false,
+    "hashTag":null,
+    "serviceModifiedDate":"2019-08-30T18:43:51.000+0000",
+    "serviceImgUri":null,
+    "serviceDescription":"12341232\n123\n12\n1212342",
+    "serviceRegisterDate":"2019-08-30T18:43:51.000+0000",
+    "serviceRegisterIsActive":true,
+    "servicePrice":"123,124,123원",
+    "serviceDateDescription":"12312412",
+    "serviceStartDate":"2019-08-30T18:00:00.000+0000",
+    "serviceEndDate":"2019-09-01T02:00:00.000+0000",
+    "serviceCategory":{
+      "categoryId":1,
+      "categorySubject":"요리",
+      "categoryType":"체험",
+      "categoryPeriod":"개인",
+      "categoryScale":"정기",
+      "categoryPlace":"실외"},
+    "serviceAddress":{
+      "addressId":3,
+      "addressState":"서울특별시",
+      "addressCity":"마포구",
+      "addressDong":"신공덕동",
+      "addressDetail":"170 123-123"}
+  }],
+
+  "page":1,
+  "size":3,
+  "totalCount":5
+}

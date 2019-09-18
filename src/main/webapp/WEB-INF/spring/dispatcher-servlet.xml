@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/data/jpa
+            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- set *.properties on context -->
+	<context:property-placeholder
+		location="/WEB-INF/contextProp/*.properties" />
+
+	<!-- Scans the classpath of this application for @Components to deploy as 
+		beans -->
+	<context:component-scan
+		base-package="com.pap.bucketclass" />
+
+	<!-- Configures to enable MVC configuration -->
+	<mvc:annotation-driven>
+		<!-- Configures to customize message converters -->
+		<mvc:message-converters>
+			<bean id="jsonMessageConverter"
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean id="objectMapper"
+						class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean
+								class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+						</property>
+					</bean>
+				</property>
+			</bean>
+			<bean id="xmlMessageConverter"
+				class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter">
+				<property name="objectMapper">
+					<bean id="objectMapper"
+						class="com.fasterxml.jackson.dataformat.xml.XmlMapper">
+						<property name="dateFormat">
+							<bean
+								class="com.fasterxml.jackson.databind.util.StdDateFormat" />
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<!-- read properties files -->
+<!-- 	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="message.SpringString" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean> -->
+
+
+	<!-- Register components of interceptor. -->
+	<mvc:interceptors>
+		<bean id="sessionTimerInterceptor"
+			class="com.pap.bucketclass.support.UserInterceptor" />
+	</mvc:interceptors>
+
+	<!-- Configures the static resources -->
+	<mvc:resources mapping="/tiles/**" location="/WEB-INF/tiles/" />
+	<mvc:resources mapping="/css/**" location="/WEB-INF/css/" />
+	<mvc:resources mapping="/img/**" location="/WEB-INF/img/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/js/" />
+	<mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/" />
+	
+<!-- 	<mvc:resources mapping="/css/**" location="/WEB-INF/css/" />
+	<mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
+	<mvc:resources mapping="/js/**" location="/WEB-INF/js/" /> -->
+
+    <!-- Tiles 3 Configurer -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/spring/default-layout.xml</value>
+                <value>/WEB-INF/spring/dashboard-layout.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Tiles 3  ViewResolver-->
+    <bean id="tilesViewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        <property name="order" value="1" />
+    </bean>
+
+	<!-- Resolves view names to protected .jsp resources within the /WEB-INF/views 
+		directory -->
+	<mvc:view-controller path="/login" view-name="member-login" />
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+        <property name="order" value="2" />
+	</bean>
+
+	<!-- Configure the data source bean -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/back?serverTimezone=UTC&amp;useSSL=false" />
+		<property name="username" value="master" />
+		<property name="password" value="Test1234" />
+	</bean>
+
+	<!-- Create default configuration for Hibernate -->
+	<bean id="hibernateJpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+
+	<!-- Configure the entity manager factory bean -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter"
+			ref="hibernateJpaVendorAdapter" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.ejb.use_class_enhancer">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="javax.persistence.schema-generation.database.action">none</prop>
+			</props>
+		</property>
+		<property name="packagesToScan"
+			value="com.pap.bucketclass.entity" />
+		<property name="sharedCacheMode" value="ENABLE_SELECTIVE" />
+		<property name="validationMode" value="NONE" />
+	</bean>
+
+	<!-- Configure the transaction manager bean -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- Enable annotation driven transaction management -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<!-- Configure Spring Data JPA and set the base package of the repository 
+		interfaces -->
+	<jpa:repositories
+		base-package="com.pap.bucketclass.repository" />
+
+</beans>

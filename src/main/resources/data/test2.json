@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "serviceId": 1,
+      "memberId": "quotia72",
+      "serviceTitle": "된장국 만들기",
+      "accountBank": "국민은행",
+      "accountNumber": "123456-12-123456",
+      "serviceIsDelete": false,
+      "hashTag": "된장국⨂맛있당",
+      "serviceModifiedDate": "2019-08-29T21:25:15.000+0000",
+      "serviceRegisterIsActive": true,
+      "servicePrice": "16,000원",
+      "serviceDateDescription": "주3회 (월,화,수) 13시~15시",
+      "serviceStartDate": "2017-08-27T15:12:00.000+0000",
+      "serviceEndDate": "2017-10-05T09:12:00.000+0000",
+      "serviceDescription": "몸에 좋고 맛도 좋은\n된장국이다아",
+      "serviceCategory": {
+        "categoryId": 1,
+        "categorySubject": "요리",
+        "categoryType": "체험",
+        "categoryPeriod": "비정기",
+        "categoryScale": "단체",
+        "categoryPlace": "실내"
+      },
+      "serviceAddress": {
+        "addressId": 1,
+        "addressState": "서울특별시",
+        "addressCity": "마포구",
+        "addressDong": "신수동",
+        "addressDetail": "63-14"
+      }
+    }
+  ],
+  "page": 1,
+  "size": 3,
+  "totalCount": 1
+}

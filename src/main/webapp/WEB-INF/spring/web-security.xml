@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans 
+	   xmlns="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security.xsd
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <http auto-config="true" use-expressions="true">
+        <csrf disabled="true" />
+        
+        <!-- static files -->
+        <intercept-url pattern="/tiles/**" access="permitAll" />
+        <intercept-url pattern="/css/**" access="permitAll" />
+        <intercept-url pattern="/js/**" access="permitAll" />
+        <intercept-url pattern="/img/**" access="permitAll" />
+        <intercept-url pattern="/fonts/**" access="permitAll" />
+        
+        <!-- public uri -->
+        <intercept-url pattern="/signup/**" access="isAnonymous()" />
+        <intercept-url pattern="/login/**" access="isAnonymous()" />
+        <intercept-url pattern="/service-listing/**" access="permitAll" />
+        
+        <!-- control privilege uri -->  
+		<intercept-url pattern="/provider/**" access="isAuthenticated()" />
+        <intercept-url pattern="/customer/**" access="isAuthenticated()" /> 
+		
+        <!-- my test uri -->
+        <intercept-url pattern="/test/**" access="permitAll" />
+        <!-- <intercept-url pattern="/**" access="isAuthenticated()" /> -->
+	 	<!-- always-use-default-target="true" --> 
+ 		<form-login 
+ 		login-page="/login" 
+ 		default-target-url="/" />
+        <http-basic />
+
+        <logout logout-success-url="/login"
+                logout-url="/logout" />
+                
+    </http>
+
+	<beans:bean id="memberDetailsService"
+                class="com.pap.bucketclass.service.LocalMemberDetailsService" />
+
+<!-- 	<beans:bean id="passwordEncoder" 
+				class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" /> -->
+<!-- 	<beans:bean id="passwordEncoder" 
+				class="org.springframework.security.crypto.password.StandardPasswordEncoder" /> -->
+	<beans:bean id="passwordEncoder" 
+				class="com.pap.bucketclass.config.SimplePasswordEncoder" />
+
+    <!-- File Upload -->
+    <beans:bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="10485760"></beans:property>
+    </beans:bean>
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="memberDetailsService">
+            <password-encoder ref="passwordEncoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>
